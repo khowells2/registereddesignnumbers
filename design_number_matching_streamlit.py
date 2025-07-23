@@ -56,7 +56,9 @@ try:
                 st.write(f"Results for Design Number {design_number}:")
                 # Select and display the desired columns
                 display_cols = ['Citable Reference', 'Context Description', 'Title', 'Covering Dates']
-                st.dataframe(relevant_df[display_cols]) # Use st.dataframe for displaying tables
+
+                # Apply text wrapping to the dataframe display
+                st.dataframe(relevant_df[display_cols], width=1000, height=500) # Adjust width and height as needed
             else:
                 st.warning(f"Design number {design_number} not found in any range.")
         except ValueError:
