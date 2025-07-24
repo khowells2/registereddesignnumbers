@@ -40,15 +40,24 @@ try:
             if not relevant_df.empty:
                 st.write(f"Results for Design Number {design_number}:")
 
-                # Manually format and display each row to mimic a table with markdown links
+                # Define the columns to display in the table
+                display_cols = ['Citable Reference', 'Context Description', 'Title', 'Covering Dates', 'ID']
+
+                # Create the table header
+                header = "| " + " | ".join(display_cols + ["Details URL"]) + " |"
+                separator = "| " + " | ".join(["---"] * (len(display_cols) + 1)) + " |"
+                table_content = [header, separator]
+
+                # Add each row to the table content
                 for index, row in relevant_df.iterrows():
-                    st.markdown("---") # Separator for each entry
-                    st.markdown(f"**Citable Reference:** {row['Citable Reference']}")
-                    st.markdown(f"**Context Description:** {row['Context Description']}")
-                    st.markdown(f"**Title:** {row['Title']}")
-                    st.markdown(f"**Covering Dates:** {row['Covering Dates']}")
-                    st.markdown(f"**ID:** {row['ID']}")
-                    st.markdown(f"**Discovery link:** [Discovery link](https://discovery.nationalarchives.gov.uk/details/r/{row['ID']})")
+                    row_data = [str(row[col]) for col in display_cols]
+                    details_url = f"[Discovery link](https://discovery.nationalarchives.gov.uk/details/r/{row['ID']})"
+                    row_data.append(details_url)
+                    table_content.append("| " + " | ".join(row_data) + " |")
+
+                # Join the table content and display as markdown
+                st.markdown("\n".join(table_content))
+
 
             else:
                 st.warning(f"Design number {design_number} not found in any range.")
