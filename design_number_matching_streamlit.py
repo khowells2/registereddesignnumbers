@@ -38,16 +38,17 @@ try:
             relevant_df = find_relevant_rows(design_number, df)
 
             if not relevant_df.empty:
-                # Create the hyperlink column
-                relevant_df['Details URL'] = relevant_df['ID'].apply(lambda x: f'[Discovery link](https://discovery.nationalarchives.gov.uk/details/r/{x})')
-
-
                 st.write(f"Results for Design Number {design_number}:")
                 # Select and display the desired columns, including the new URL column
-                display_cols = ['Citable Reference', 'Context Description', 'Title', 'Covering Dates', 'ID', 'Details URL']
+                display_cols = ['Citable Reference', 'Context Description', 'Title', 'Covering Dates', 'ID']
 
-                # Apply text wrapping to the dataframe display
-                st.dataframe(relevant_df[display_cols]) # Adjust width and height as needed
+                for index, row in relevant_df.iterrows():
+                    st.write("---") # Separator for each entry
+                    for col in display_cols:
+                        st.write(f"**{col}:** {row[col]}")
+                    # Display the hyperlink using markdown
+                    st.markdown(f"**Details URL:** [Discovery link](https://discovery.nationalarchives.gov.uk/details/r/{row['ID']})")
+
             else:
                 st.warning(f"Design number {design_number} not found in any range.")
         except ValueError:
