@@ -26,7 +26,6 @@ github_csv_url = 'TNA_Search_Results_23-07-2025T12_26_09.csv' # Replace with the
 
 df = None
 try:
-try:
     df = pd.read_csv(github_csv_url)
     st.success("File loaded successfully from GitHub!")
 
