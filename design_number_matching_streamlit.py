@@ -41,7 +41,7 @@ try:
                 st.write(f"Results for Design Number {design_number}:")
 
                 # Define the columns to display in the table
-                display_cols = ['Citable Reference', 'Context Description', 'Title', 'Covering Dates', 'ID']
+                display_cols = ['Citable Reference', 'Context Description', 'Title', 'Covering Dates',]
 
                 # Create the table header
                 header = "| " + " | ".join(display_cols + ["Details URL"]) + " |"
