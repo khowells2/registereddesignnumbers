@@ -40,7 +40,7 @@ try:
             if not relevant_df.empty:
                 st.write(f"Results for Design Number {design_number}:")
                 # Select and display the desired columns, including the new URL column
-                display_cols = ['Citable Reference', 'Context Description', 'Title', 'Covering Dates', 'ID']
+                display_cols = ['Citable Reference', 'Context Description', 'Title', 'Covering Dates']
 
                 for index, row in relevant_df.iterrows():
                     st.write("---") # Separator for each entry
