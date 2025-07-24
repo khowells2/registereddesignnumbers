@@ -38,12 +38,15 @@ try:
             relevant_df = find_relevant_rows(design_number, df)
 
             if not relevant_df.empty:
+                # Create the hyperlink column
+                relevant_df['Details URL'] = 'https://discovery.nationalarchives.gov.uk/details/r/' + relevant_df['ID'].astype(str)
+
                 st.write(f"Results for Design Number {design_number}:")
-                # Select and display the desired columns
-                display_cols = ['Citable Reference', 'Context Description', 'Title', 'Covering Dates']
+                # Select and display the desired columns, including the new URL column
+                display_cols = ['Citable Reference', 'Context Description', 'Title', 'Covering Dates', 'ID', 'Details URL']
 
                 # Apply text wrapping to the dataframe display
-                st.dataframe(relevant_df[display_cols], width=1000, height=500) # Adjust width and height as needed
+                st.dataframe(relevant_df[display_cols]) # Adjust width and height as needed
             else:
                 st.warning(f"Design number {design_number} not found in any range.")
         except ValueError:
