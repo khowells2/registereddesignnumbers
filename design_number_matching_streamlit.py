@@ -39,7 +39,8 @@ try:
 
             if not relevant_df.empty:
                 # Create the hyperlink column
-                relevant_df['Details URL'] = 'https://discovery.nationalarchives.gov.uk/details/r/' + relevant_df['ID'].astype(str)
+                relevant_df['Details URL'] = relevant_df['ID'].apply(lambda x: f'[Discovery link](https://discovery.nationalarchives.gov.uk/details/r/{x})')
+
 
                 st.write(f"Results for Design Number {design_number}:")
                 # Select and display the desired columns, including the new URL column
