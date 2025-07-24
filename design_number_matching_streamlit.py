@@ -26,6 +26,7 @@ github_csv_url = 'TNA_Search_Results_23-07-2025T12_26_09.csv' # Replace with the
 
 df = None
 try:
+try:
     df = pd.read_csv(github_csv_url)
     st.success("File loaded successfully from GitHub!")
 
@@ -39,15 +40,16 @@ try:
 
             if not relevant_df.empty:
                 st.write(f"Results for Design Number {design_number}:")
-                # Select and display the desired columns, including the new URL column
-                display_cols = ['Citable Reference', 'Context Description', 'Title', 'Covering Dates']
 
+                # Manually format and display each row to mimic a table with markdown links
                 for index, row in relevant_df.iterrows():
-                    st.write("---") # Separator for each entry
-                    for col in display_cols:
-                        st.write(f"**{col}:** {row[col]}")
-                    # Display the hyperlink using markdown
-                    st.markdown(f"**Details URL:** [Discovery link](https://discovery.nationalarchives.gov.uk/details/r/{row['ID']})")
+                    st.markdown("---") # Separator for each entry
+                    st.markdown(f"**Citable Reference:** {row['Citable Reference']}")
+                    st.markdown(f"**Context Description:** {row['Context Description']}")
+                    st.markdown(f"**Title:** {row['Title']}")
+                    st.markdown(f"**Covering Dates:** {row['Covering Dates']}")
+                    st.markdown(f"**ID:** {row['ID']}")
+                    st.markdown(f"**Discovery link:** [Discovery link](https://discovery.nationalarchives.gov.uk/details/r/{row['ID']})")
 
             else:
                 st.warning(f"Design number {design_number} not found in any range.")
