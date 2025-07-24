@@ -2,21 +2,6 @@ import pandas as pd
 import re
 import streamlit as st # Assuming you'll use Streamlit
 
-# Function to find the citable reference for a given design number
-def find_citable_reference(design_number, df):
-    references = []
-    for _, row in df.iterrows():
-        description = str(row['Description'])
-        match = re.search(r'Designs (\d+)-(\d+)', description)
-        if match:
-            start, end = int(match.group(1)), int(match.group(2))
-            if start <= design_number <= end:
-                references.append(row['Citable Reference'])
-    if references:
-        return references
-    else:
-        return ["Design number not found in any range."]
-
 # Function to find the relevant rows for a given design number
 def find_relevant_rows(design_number, df):
     relevant_rows = []
